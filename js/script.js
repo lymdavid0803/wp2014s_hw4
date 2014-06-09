@@ -24,12 +24,6 @@ FB.init({
                          $("body").append('My ID is' + response.id);
                     });
           
-          FB.api('/me/picture?type=normal', function(response) { // normal/large/squere 
-            var str="<img src="+ response.data.url +">";
-            $('body').append(str);
-          });
-          
-          
           
           FB.api('/me/photos', 'post', {
             name:"test",
