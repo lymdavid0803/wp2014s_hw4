@@ -19,10 +19,31 @@ FB.init({
                     var accessToken = response.authResponse.accessToken;
           
           FB.api('/me/picture?type=normal', function(response) { // normal/large/squere 
-            var str="<img src="+ response.data.url +">";
+            var str="<img id=preview1 crossOrigin = 'Anonymous' src="+ response.data.url +">";
             $('body').append(str);
           });
-          
+
+                } else if (response.status === 'not_authorized') {
+                    console.log("this user is not authorizied your apps");
+                    FB.login(function (response) {
+                        // FB.api('/me/feed', 'post', {message: 'I\'m started using FB API'});
+                        if (response.authResponse) { // if user login to your apps right after handle an event
+                            window.location.reload();
+                        };
+                    }, {
+                        scope: 'user_about_me,email,user_location,user_photos,publish_actions,user_birthday,user_likes'
+                    });
+                } else {
+                    console.log("this isn't logged in to Facebook.");
+                    FB.login(function (response) {
+                        if (response.authResponse) {
+                            window.location.reload();
+                        } else {
+                            //alertify.alert('An Error has Occurs,Please Reload your Pages');
+                        }
+                    });
+                }
+ });
 //以下為canvas的程式碼，基本上不需多動，依據comments修改即可
 	
 	//起始畫面
@@ -76,7 +97,7 @@ FB.init({
       if(isDragging){ //當拖拉為True時
           	ctx.clearRect(0,0,canvasWidth,canvasHeight); //移除canvas起始的內容
 			var profileIMG = document.getElementById("preview1");//抓html裡預載入的照片
-			profileIMG.crossOrigin = "Anonymous"; // 這務必要做，為了讓Facebook的照片能夠crossdomain傳入到你的頁面，CORS Policy請參考https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image 
+			//profileIMG.crossOrigin = "Anonymous"; // 這務必要做，為了讓Facebook的照片能夠crossdomain傳入到你的頁面，CORS Policy請參考https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_enabled_image 
 			//canvas.width = profileIMG.width;//設定canvas的大小需符合profileimg的大小
 			//canvas.height = profileIMG.height;
 			ctx.drawImage(profileIMG,0,0);//從XY軸0，0值開始畫如profileimg
