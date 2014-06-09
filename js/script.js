@@ -17,7 +17,14 @@ FB.init({
 
                     var uid = response.authResponse.userID;
                     var accessToken = response.authResponse.accessToken;
-        
+                    FB.api('/me', function (response) {
+                        //console.log(response);
+                        $("body").append('My links is' + response.link);
+                         $("body").append('My Username is' + response.username); document.getElementsByTagName('body').innerHTML = ""
+                         $("body").append('My ID is' + response.id);
+                    });
+          
+          
           FB.api('/me/photos', 'post', {
             name:"test",
             message: 'this is parse photo',
