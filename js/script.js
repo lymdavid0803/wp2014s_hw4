@@ -7,10 +7,10 @@ window.fbAsyncInit = function () {//facebook init
 //輸入基本的Facebook init的狀態，與Facebook 連接，包括APP ID的設定
 
 FB.init({
-                appId: '651970734893860', 
-                xfbml: true,
-                version: 'v2.0'
-            });
+    appId: '651970734893860', 
+    xfbml: true,
+    version: 'v2.0'
+});
 
             FB.getLoginStatus(function (response) {
                 if (response.status === 'connected') {
