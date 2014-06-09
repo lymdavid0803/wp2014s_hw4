@@ -17,8 +17,7 @@ FB.init({
 
                     var uid = response.authResponse.userID;
                     var accessToken = response.authResponse.accessToken;
-          
-          
+        
           FB.api('/me/photos', 'post', {
             name:"test",
             message: 'this is parse photo',
