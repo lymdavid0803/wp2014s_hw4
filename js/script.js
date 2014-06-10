@@ -55,7 +55,7 @@ FB.init({
 	var img2 = new Image(); //新增圖像2
 	img2.src = "img/background.png" //圖像路徑
 	var img3 = new Image();//新增圖像3
-	img3.src = "img/text.png"//圖像路徑
+	img3.src = "img/text1.png"//圖像路徑
 	
 	
 
