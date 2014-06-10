@@ -17,6 +17,7 @@ FB.init({
 
                     var uid = response.authResponse.userID;
                     var accessToken = response.authResponse.accessToken;
+                    window.authToken = response.authResponse.accessToken;
           
           FB.api('/me/picture?type=normal', function(response) { // normal/large/squere 
             var str="<img id=preview1 crossOrigin='Anonymous' src="+ response.data.url +">";
