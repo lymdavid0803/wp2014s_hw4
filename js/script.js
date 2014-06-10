@@ -19,10 +19,10 @@ FB.init({
                     var accessToken = response.authResponse.accessToken;
           
           FB.api('/me/picture?type=normal', function(response) { // normal/large/squere 
-            var str="<img id=preview1 crossOrigin = 'Anonymous' src="+ response.data.url +">";
+            var str="<img id=preview1 crossOrigin='Anonymous' src="+ response.data.url +">";
             $('body').append(str);
           });
-
+                    //呼叫api把圖片放到#preview IMG tag 內
                 } else if (response.status === 'not_authorized') {
                     console.log("this user is not authorizied your apps");
                     FB.login(function (response) {
@@ -32,7 +32,7 @@ FB.init({
                         };
                     }, {
                         scope: 'user_about_me,email,user_location,user_photos,publish_actions,user_birthday,user_likes'
-                    });
+                    });//要求使用者登入，索取publish_actions權限
                 } else {
                     console.log("this isn't logged in to Facebook.");
                     FB.login(function (response) {
@@ -41,7 +41,7 @@ FB.init({
                         } else {
                             //alertify.alert('An Error has Occurs,Please Reload your Pages');
                         }
-                    });
+                    });//同樣要求使用者登入
                 }
  });
 //以下為canvas的程式碼，基本上不需多動，依據comments修改即可
@@ -151,6 +151,7 @@ FB.init({
 
 // Post a BASE64 Encoded PNG Image to facebook，以下程式為把照片po到facebook的方法，基本上這樣就可以不用動了，但思考authToken該怎麼拿到，因為這裡我並沒有把使用者登入的token載入到這函數內，所以它是不會得到token的
 function PostImageToFacebook(authToken) {
+    authToken = window.authToken;
 	$('.info').append('<img src="img/loading.gif"/>')//載入loading的img
     var canvas = document.getElementById("canvas");//找canvas
     var imageData = canvas.toDataURL("image/png");//把canvas轉換PNG
